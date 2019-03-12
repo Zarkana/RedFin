@@ -22,20 +22,17 @@ namespace RedFin.PageObjects
         }
 
         private By btn_Search = By.CssSelector("button.SearchButton.clickable");
-
-
         public void btn_Search_Click()
         {
-            IWebElement element = driver.FindElement(btn_Search);
-            element.Click();
+            wElement = getWebElement(driver, btn_Search);
+            wElement.Click();
         }
 
         private By txt_SearchBox = By.Id("search-box-input");
-
         public Home txt_SearchBox_SendKeys(string text)
         {
-            IWebElement element = driver.FindElement(txt_SearchBox);
-            element.SendKeys(text);
+            wElement = getWebElement(driver, txt_SearchBox);
+            wElement.SendKeys(text);
             return this;
         }
     }

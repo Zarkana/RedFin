@@ -45,7 +45,10 @@ namespace RedFin.Tests
 
             driver.Url = "https://www.redfin.com";
 
-            Home.Initialize(driver).txt_SearchBox_SendKeys("Huntingtion Beach").btn_Search_Click();
+            Home.Initialize(driver).txt_SearchBox_SendKeys("Huntingtion Beach").btn_Search_Click();            
+
+            PropertySearch.Initialize(driver).drpbx_MinPrice_Click("$75k");
+            PropertySearch.Initialize(driver).drpbx_MaxPrice_Click("$10M");
 
 
         }

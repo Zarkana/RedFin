@@ -13,3 +13,7 @@ c:\users\joecampbell\documents\visual studio 2015\Projects\RedFin\RedFin\bin\Deb
 c:\users\joecampbell\documents\visual studio 2015\Projects\RedFin\RedFin\obj\Debug\RedFin.csprojResolveAssemblyReference.cache
 c:\users\joecampbell\documents\visual studio 2015\Projects\RedFin\RedFin\obj\Debug\RedFin.exe
 c:\users\joecampbell\documents\visual studio 2015\Projects\RedFin\RedFin\obj\Debug\RedFin.pdb
+c:\users\joecampbell\documents\visual studio 2015\Projects\RedFin\RedFin\bin\Debug\WebDriver.Support.dll
+c:\users\joecampbell\documents\visual studio 2015\Projects\RedFin\RedFin\bin\Debug\WebDriver.Support.xml
+c:\users\joecampbell\documents\visual studio 2015\Projects\RedFin\RedFin\bin\Debug\SeleniumExtras.PageObjects.dll
+c:\users\joecampbell\documents\visual studio 2015\Projects\RedFin\RedFin\bin\Debug\SeleniumExtras.WaitHelpers.dll
