@@ -1,8 +1,10 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace RedFin.PageObjects
@@ -32,6 +34,8 @@ namespace RedFin.PageObjects
         public Home txt_SearchBox_SendKeys(string text)
         {
             wElement = getWebElement(driver, txt_SearchBox);
+            //To wait for search field to load
+            Thread.Sleep(1000);
             wElement.SendKeys(text);
             return this;
         }

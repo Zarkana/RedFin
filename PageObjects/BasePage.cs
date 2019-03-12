@@ -17,36 +17,42 @@ namespace RedFin.PageObjects
             baseWebDriver = driver;
         }
 
-		//public bool IsElementPresent(By by, int timeOutInSeconds = 5)
-		//{
-		//	bool results = false;
-		//	try
-		//	{
-		//		baseWebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeOutInSeconds);
-		//		results = baseWebDriver.FindElement(by).Displayed;
-		//		return results;
-		//	}
-		//	catch (NoSuchElementException ex)
-		//	{
-		//		return false;
-		//	}
-		//	finally
-		//	{
-		//		baseWebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
-		//	}
-		//}
-
         public IWebElement getWebElement(IWebDriver driver, By by, int timeout = 120)
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(by));
             return driver.FindElement(by);
         }
-        public IList<IWebElement> getWebElements(IWebDriver driver, By by, int timeout = 120)
+        public IList<IWebElement> getWebElements(IWebDriver driver, By by, int timeout = 30)
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(by));
             return driver.FindElements(by);
+        }
+
+        public void SelectFromFlyOut(IWebDriver driver, string text, By by)
+        {
+            IList<IWebElement> elements = getWebElements(driver, by);            
+
+            foreach (IWebElement element in elements)
+            {
+                try
+                {
+                    if (element.Text.Equals(text))
+                    {
+                        element.Click();
+                    }
+                    else
+                    {
+
+                    }
+                }
+                catch (StaleElementReferenceException ex)
+                {
+                    //The custom dropdown is really finicky and wants to dissapear causing stale elements
+                    Console.WriteLine(ex);
+                }
+            }            
         }
     }
 }
