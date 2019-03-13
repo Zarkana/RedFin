@@ -36,13 +36,13 @@ namespace RedFin.PageObjects
             return this;
         }
 
+
         //FILTERS
 
         private By drpbx_MinPrice = By.CssSelector("span.quickMinPrice.withFlyout.withOptions.mounted.field.select.Select.clickable.optional");
         public PropertySearch drpbx_MinPrice_Click(string text)
         {
-            //Note: Could not use SelectElement as the dropdown is a custom implemented dropdown and actual select is not displayed
-
+            //Note: Could not use the following SelectElement as the dropdown is a custom implemented dropdown and actual select is not displayed
             //IWebElement flyout = driver.FindElement(By.CssSelector("select[name='namequickMinPrice']"));
             //SelectElement el = new SelectElement(flyout);
             //el.SelectByText("$75k");
@@ -50,6 +50,7 @@ namespace RedFin.PageObjects
             wElement = getWebElement(driver, drpbx_MinPrice);
             wElement.Click();
 
+            //Custom method for opening custom FlyOut
             SelectFromFlyOut(driver, text, By.CssSelector(".quickMinPrice div.Flyout[role='Dialog'] div.option span"));
             return this;
         }
@@ -104,7 +105,6 @@ namespace RedFin.PageObjects
             }
             return this;
         }
-
         private By btn_StepUp = By.CssSelector("span.baths span.step-up");
         private PropertySearch btn_StepUp_Click()
         {
@@ -114,7 +114,6 @@ namespace RedFin.PageObjects
             return this;
         }
 
-
         private By btn_ApplyFilters = By.CssSelector("button[data-rf-test-id='apply-search-options']");
         public PropertySearch btn_ApplyFilters_Click()
         {
@@ -122,6 +121,7 @@ namespace RedFin.PageObjects
             wElement.Click();
             return this;
         }
+
 
         //HOME CARDS
 
@@ -132,23 +132,6 @@ namespace RedFin.PageObjects
             return getWebElements(driver, HomeCards);
         }
 
-
-        private By HomeCardPrices = By.CssSelector("div.homecards div.HomeCardContainer .bottomV2 [data-rf-test-name='homecard-price']");
-        //public PropertySearch ValidateMinPrice(int minPrice)
-        //{            
-        //    IList<IWebElement> elements = getWebElements(driver, HomeCardPrices);
-        //    //To allow for results to populate
-        //    Thread.Sleep(1000);
-        //    List<string> elementTexts = new List<string>(driver.FindElements(HomeCardPrices).Select(iw => iw.Text));
-
-        //    foreach (string elementText in elementTexts)
-        //    {
-        //        int value = Int32.Parse(elementText.Replace(",", "").Replace("$", ""));
-        //        if (value < minPrice)
-        //            Assert.Fail("Price lower than the minimum price");                
-        //    }
-        //    return this;
-        //}
         public PropertySearch Validate_MinPrice(int minPrice)
         {
             foreach (float price in priceResults)
@@ -158,21 +141,6 @@ namespace RedFin.PageObjects
             }
             return this;
         }
-        //public PropertySearch ValidateMaxPrice(int maxPrice)
-        //{
-        //    IList<IWebElement> elements = getWebElements(driver, HomeCardPrices);
-        //    //To allow for results to populate
-        //    Thread.Sleep(1000);
-        //    List<string> elementTexts = new List<string>(driver.FindElements(HomeCardPrices).Select(iw => iw.Text));
-
-        //    foreach (string elementText in elementTexts)
-        //    {
-        //        int value = Int32.Parse(elementText.Replace(",", "").Replace("$", ""));
-        //        if (value > maxPrice)
-        //            Assert.Fail("Price higher than the maximum price");
-        //    }
-        //    return this;
-        //}
 
         public PropertySearch Validate_MaxPrice(int maxPrice)
         {
@@ -183,26 +151,7 @@ namespace RedFin.PageObjects
             }
             return this;
         }
-
-
-        private By HomeCardBeds = By.CssSelector("div.homecards div.HomeCardContainer .bottomV2 .HomeStatsV2 .stats");
-        //public PropertySearch ValidateMinBeds(float minBeds)
-        //{
-        //    //IList<IWebElement> elements = getWebElements(driver, HomeCardPrices);
-        //    //To allow for results to populate
-        //    Thread.Sleep(1000);
-        //    //List<string> elementTexts = new List<string>(driver.FindElements(HomeCardBeds).Select(iw => iw.Text));
-        //    IEnumerable<string> elementTexts = new List<string>(driver.FindElements(HomeCardBeds).Select(iw => iw.Text));
-        //    elementTexts = elementTexts.Where(u => u.Contains("Bed"));
-
-        //    foreach (string elementText in elementTexts)
-        //    {
-        //        float value = float.Parse(elementText.Replace("Beds", "").Replace(" ", ""));
-        //        if (value < minBeds)
-        //            Assert.Fail("Less beds than the minimum");
-        //    }
-        //    return this;
-        //}
+        
         public PropertySearch Validate_MinBeds(float minBeds)
         {
             foreach (float bedNumber in numberOfBedResults)
@@ -213,24 +162,6 @@ namespace RedFin.PageObjects
             return this;
         }
 
-
-        //public PropertySearch ValidateMaxBeds(float maxBeds)
-        //{
-        //    //IList<IWebElement> elements = getWebElements(driver, HomeCardPrices);
-        //    //To allow for results to populate
-        //    Thread.Sleep(1000);
-        //    //List<string> elementTexts = new List<string>(driver.FindElements(HomeCardBeds).Select(iw => iw.Text));
-        //    IEnumerable<string> elementTexts = new List<string>(driver.FindElements(HomeCardBeds).Select(iw => iw.Text));
-        //    elementTexts = elementTexts.Where(u => u.Contains("Bed"));
-
-        //    foreach (string elementText in elementTexts)
-        //    {
-        //        float value = float.Parse(elementText.Replace("Beds", "").Replace(" ", ""));
-        //        if (value > maxBeds)
-        //            Assert.Fail("More beds than the maximum");
-        //    }
-        //    return this;
-        //}
         public PropertySearch Validate_MaxBeds(float maxBeds)
         {
             foreach (float bedNumber in numberOfBedResults)
@@ -240,32 +171,9 @@ namespace RedFin.PageObjects
             }
             return this;
         }
-
-        //private By HomeCardBaths = By.CssSelector("div.homecards div.HomeCardContainer .bottomV2 .HomeStatsV2 .stats");
-        //public PropertySearch ValidateMinBaths(float minBaths)
-        //{
-        //    //IList<IWebElement> elements = getWebElements(driver, HomeCardPrices);
-        //    //To allow for results to populate
-        //    Thread.Sleep(1000);
-        //    IEnumerable<string> elementTexts = new List<string>(driver.FindElements(HomeCardBaths).Select(iw => iw.Text));
-        //    elementTexts = elementTexts.Where(u => u.Contains("Baths"));
-
-        //    foreach (string elementText in elementTexts)
-        //    {
-        //        float value = float.Parse(elementText.Replace("Baths", "").Replace(" ", ""));
-        //        if (value < minBaths)
-        //            Assert.Fail("Less baths than the minimum");
-        //    }
-        //    return this;
-        //}
-        private By HomeCardBaths = By.CssSelector("div.homecards div.HomeCardContainer .bottomV2 .HomeStatsV2 .stats");
+        
         public PropertySearch Validate_MinBaths(float minBaths)
         {
-            ////IList<IWebElement> elements = getWebElements(driver, HomeCardPrices);
-            ////To allow for results to populate
-            //Thread.Sleep(1000);
-            //IEnumerable<string> elementTexts = new List<string>(driver.FindElements(HomeCardBaths).Select(iw => iw.Text));
-            //elementTexts = elementTexts.Where(u => u.Contains("Baths"));
             foreach (float bathNumber in numberOfBathResults)
             {                
                 if (bathNumber < minBaths)
@@ -274,15 +182,22 @@ namespace RedFin.PageObjects
             return this;
         }
 
+
         //PAGE NAVIGATION
+
         private By SearchResultsPages = By.CssSelector("[data-rf-test-id='paging-controls'] .goToPage");
+
+        private By HomeCardPrices = By.CssSelector("div.homecards div.HomeCardContainer .bottomV2 [data-rf-test-name='homecard-price']");
+        private By HomeCardBeds = By.CssSelector("div.homecards div.HomeCardContainer .bottomV2 .HomeStatsV2 .stats");
+        private By HomeCardBaths = By.CssSelector("div.homecards div.HomeCardContainer .bottomV2 .HomeStatsV2 .stats");
         public PropertySearch GetSearchResults()
         {
-            //IList<IWebElement> elements = getWebElements(driver, SearchResultsPages);
             //To allow for the pageNumbers to populate
             Thread.Sleep(1000);
             IEnumerable<string> pageNumbers = new List<string>(driver.FindElements(SearchResultsPages).Select(iw => iw.Text));
-            int totalPages = Int32.Parse(pageNumbers.Last());
+            int totalPages = 1;
+            if(pageNumbers.Count() > 0)
+                totalPages = Int32.Parse(pageNumbers.Last());
             
             for (int i = 0; i < totalPages; i++)
             {

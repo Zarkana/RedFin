@@ -14,6 +14,5 @@ namespace RedFin.Tests
         {
             return new ChromeDriver();
         }
-
     }
 }

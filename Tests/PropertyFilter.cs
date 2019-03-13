@@ -30,14 +30,6 @@ namespace RedFin.Tests
     {
         private IWebDriver driver;
 
-
-        [OneTimeSetUp]
-        public void BeforeTest()
-        {
-
-        }
-
-
         [Test]
         public void PropertyFilterTest()
         {
@@ -46,7 +38,7 @@ namespace RedFin.Tests
             driver.Url = "https://www.redfin.com";
 
             //Use your city to perform the property search
-            Home.Initialize(driver).txt_SearchBox_SendKeys("Huntingtion Beach").btn_Search_Click();            
+            Home.Initialize(driver).txt_SearchBox_SendKeys("Huntingtion Beach").btn_Search_Click();
 
             //Use at least 3 filters to perform the search
             PropertySearch.Initialize(driver)
@@ -65,9 +57,7 @@ namespace RedFin.Tests
                 .Validate_MaxPrice(1250000)
                 .Validate_MinBeds(1)
                 .Validate_MaxBeds(6)
-                .Validate_MinBaths(3);
+                .Validate_MinBaths(3);            
         }
-
-
     }
 }
