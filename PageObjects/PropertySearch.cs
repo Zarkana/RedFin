@@ -125,13 +125,6 @@ namespace RedFin.PageObjects
 
         //HOME CARDS
 
-        private By HomeCards = By.CssSelector("div.homecards div.HomeCardContainer .bottomV2");
-
-        public IList<IWebElement> GetHomeCards()
-        {
-            return getWebElements(driver, HomeCards);
-        }
-
         public PropertySearch Validate_MinPrice(int minPrice)
         {
             foreach (float price in priceResults)

@@ -57,7 +57,7 @@ namespace RedFin.Tests
                 .Validate_MaxPrice(1250000)
                 .Validate_MinBeds(1)
                 .Validate_MaxBeds(6)
-                .Validate_MinBaths(3);            
+                .Validate_MinBaths(3);
         }
     }
 }
