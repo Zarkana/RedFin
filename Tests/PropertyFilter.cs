@@ -30,11 +30,15 @@ namespace RedFin.Tests
     {
         private IWebDriver driver;
 
+        [SetUp]
+        public void Initialize()
+        {
+            driver = CreateDriver();
+        }
+
         [Test]
         public void PropertyFilterTest()
         {
-            driver = CreateDriver();
-
             driver.Url = "https://www.redfin.com";
 
             //Use your city to perform the property search
@@ -58,6 +62,12 @@ namespace RedFin.Tests
                 .Validate_MinBeds(1)
                 .Validate_MaxBeds(6)
                 .Validate_MinBaths(3);
+        }
+
+        [TearDown]
+        public void EndTest()
+        {
+            driver.Close();
         }
     }
 }
