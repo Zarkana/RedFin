@@ -6,7 +6,7 @@ An automated test that checks whether a redfin property search returns the corre
 2. You will need the following plugins if not already installed in Visual Studio (DotNetSeleniumExtras.PageObjects, DotNetSeleniumExtras.WaitHelpers, NUnit, NUnit3TestAdapter, Selenium.Chrome.WebDriver, Selenium.Support, Selenium.WebDriver)
 3. Build solution and then run/debug the PropertyFilterTest
 4. (Optional) Manually change the string params in the the PropertyFilterTest to reflect what options you want to select and also change the number params to validate against
-5. (Optional) Provide tighter params to perform negative testing and confirm that test will fail for any entries outside the validated parameters
+5. (Optional) Provide tighter params to perform negative testing and confirm that test will fail for any entries outside the valid parameters
 
 ### How it Works
 1. The automation first opens http://www.redfin.com
