@@ -11,10 +11,11 @@ An automated test that checks whether a redfin property search returns the corre
 ### How it Works
 1. The automation first opens http://www.redfin.com
 2. Enters "Huntington Beach" into the search box
-3. Enters a min price, max price, min beds, max beds, and lastly minimum baths
-4. Applies the filters
-5. Iterates through each page of results and scrapes all the values from each page
-6. validate each list of values against the inputted parameters
+3. Clicks search and traverses to https://www.redfin.com/city/9164/CA/Huntington-Beach
+4. Enters a min price, max price, min beds, max beds, and lastly minimum baths
+5. Applies the filters
+6. Iterates through each page of results and scrapes all the values from each page
+7. validate each list of values against the inputted parameters
 
 ### Implementation Details
 1. Decided to use C# and Selenium as I have most recently used both to perform web automation
