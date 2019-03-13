@@ -185,9 +185,7 @@ namespace RedFin.PageObjects
         private By HomeCardBaths = By.CssSelector("div.homecards div.HomeCardContainer .bottomV2 .HomeStatsV2 .stats");
         public PropertySearch GetSearchResults()
         {
-            //To allow for the pageNumbers to populate
-            Thread.Sleep(1000);
-            IEnumerable<string> pageNumbers = new List<string>(driver.FindElements(SearchResultsPages).Select(iw => iw.Text));
+            IEnumerable<string> pageNumbers = new List<string>(getWebElements(driver, SearchResultsPages).Select(iw => iw.Text));
             int totalPages = 1;
             if(pageNumbers.Count() > 0)
                 totalPages = Int32.Parse(pageNumbers.Last());
@@ -199,10 +197,8 @@ namespace RedFin.PageObjects
                     IWebElement nextButton = getWebElement(driver, By.CssSelector(String.Format("[data-rf-test-id='react-data-paginate-page-{0}']", i)));
                     nextButton.Click();                    
                 }
-                //To allow for the house cards to populate
-                Thread.Sleep(1000);
 
-                IEnumerable<string> priceElementTexts = new List<string>(driver.FindElements(HomeCardPrices).Select(iw => iw.Text));                
+                IEnumerable<string> priceElementTexts = new List<string>(getWebElements(driver, HomeCardPrices).Select(iw => iw.Text));
 
                 foreach (string price in priceElementTexts)
                 {
@@ -210,8 +206,7 @@ namespace RedFin.PageObjects
                     priceResults.Add(value);
                 }
 
-                IEnumerable<string> bathElementTexts = new List<string>(driver.FindElements(HomeCardBaths).Select(iw => iw.Text));
-                bathElementTexts = bathElementTexts.Where(u => u.Contains("Baths") && !u.Contains("—"));
+                IEnumerable<string> bathElementTexts = new List<string>(getWebElements(driver, HomeCardBaths).Select(iw => iw.Text)).Where(u => u.Contains("Baths") && !u.Contains("—"));
 
                 foreach (string numberOfBaths in bathElementTexts)
                 {
@@ -219,8 +214,7 @@ namespace RedFin.PageObjects
                     numberOfBathResults.Add(value);
                 }
 
-                IEnumerable<string> bedElementTexts = new List<string>(driver.FindElements(HomeCardBeds).Select(iw => iw.Text));
-                bedElementTexts = bedElementTexts.Where(u => u.Contains("Beds") && !u.Contains("—"));
+                IEnumerable<string> bedElementTexts = new List<string>(getWebElements(driver, HomeCardBeds).Select(iw => iw.Text)).Where(u => u.Contains("Beds") && !u.Contains("—"));
 
                 foreach (string numberOfBeds in bedElementTexts)
                 {

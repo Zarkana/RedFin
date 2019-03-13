@@ -46,8 +46,8 @@ namespace RedFin.Tests
 
             //Use at least 3 filters to perform the search
             PropertySearch.Initialize(driver)
-                .drpbx_MinPrice_Click("$75k")
-                .drpbx_MaxPrice_Click("$1.25M")
+                .drpbx_MinPrice_Click("$50k")
+                .drpbx_MaxPrice_Click("$4M")
                 .btn_MoreFilters_Click()
                 .drpbx_MinBeds_Click("1")
                 .drpbx_MaxBeds_Click("6")
@@ -57,8 +57,8 @@ namespace RedFin.Tests
             //Verify that the results match the search criteria
             PropertySearch.Initialize(driver)
                 .GetSearchResults()
-                .Validate_MinPrice(75000)
-                .Validate_MaxPrice(1250000)
+                .Validate_MinPrice(50000)
+                .Validate_MaxPrice(4000000)
                 .Validate_MinBeds(1)
                 .Validate_MaxBeds(6)
                 .Validate_MinBaths(3);
@@ -68,6 +68,7 @@ namespace RedFin.Tests
         public void EndTest()
         {
             driver.Close();
+            driver.Quit();
         }
     }
 }
