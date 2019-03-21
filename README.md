@@ -22,8 +22,6 @@ An automated test that checks whether a redfin property search returns the corre
 2. Decided to start on the home page and navigate to the property search page as I didn't know whether we could start on the property search URL
 3. I didn't know whether we were supposed to handle cases where the results where more than 1 page worth of houses, and so I opted to just support the pagination and traverse each page
 4. At the beginning I decided to create a BasePage and BaseTest to inherit from just in case I wanted to share functionality and also just for forward thinking sake
-5. I decided to create two helper methods (getWebElement, getWebElements) in the BasePage to help with getting IWebElements it helps with dealing with stale elements
-6. I used "Thread.Sleep(1000)" a few times to deal with some stale element exceptions, I realize there is a more elegant way of handling this, but in the interest of time I decided to just do what worked consistently and will pursue more elegant solutions utilizing explicit waits in the future
-7. In cases where beds or baths were not provided in the listing I simply let it pass since the filter _should_ be allowing those results through
-8. I created a custom method to handle the custom select menus on Redfin called Flyouts, I probably could have used some JavaScript to change the display style of the hidden selects and interact with them directly but I ended up assuming that the test should follow the path that users would likely traverse and so I created the SelectFromFlyOut() method in my BasePage class so I could reuse the functionality
+5. ~~I used "Thread.Sleep(1000)" a few times to deal with some stale element exceptions, I realize there is a more elegant way of handling this, but in the interest of time I decided to just do what worked consistently and will pursue more elegant solutions utilizing explicit waits in the future~~ Now uses explicit waits to wait until animations complete on page prior to scraping data
+6. In cases where beds or baths were not provided in the listing I simply let it pass since the filter _should_ be allowing those results through
 
