@@ -2,11 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium.Support.UI;
 using NUnit.Framework;
-using System.Threading;
+using OpenQA.Selenium.Support.UI;
 
 namespace RedFin.PageObjects
 {
@@ -41,37 +38,41 @@ namespace RedFin.PageObjects
 
         private By drpbx_MinPrice = By.CssSelector("span.quickMinPrice.withFlyout.withOptions.mounted.field.select.Select.clickable.optional");
         public PropertySearch drpbx_MinPrice_Click(string text)
-        {
-            //Note: Could not use the following SelectElement as the dropdown is a custom implemented dropdown and actual select is not displayed
-            //IWebElement flyout = driver.FindElement(By.CssSelector("select[name='namequickMinPrice']"));
-            //SelectElement el = new SelectElement(flyout);
-            //el.SelectByText("$75k");
-            
+        {            
+            //Open flyout
             wElement = getWebElement(driver, drpbx_MinPrice);
             wElement.Click();
 
-            //Custom method for opening custom FlyOut
-            SelectFromFlyOut(driver, text, By.CssSelector(".quickMinPrice div.Flyout[role='Dialog'] div.option span"));
+            //Click option
+            IWebElement element = driver.FindElement(By.XPath($"//span[contains(@class, 'quickMinPrice')]//span[contains(text(),'{text}')]"));
+            element.Click();
+
             return this;
         }
 
         private By drpbx_MaxPrice = By.CssSelector("span.quickMaxPrice.withFlyout.withOptions.mounted.field.select.Select.clickable.optional");
         public PropertySearch drpbx_MaxPrice_Click(string text)
         {
+            //Open flyout
             wElement = getWebElement(driver, drpbx_MaxPrice);
             wElement.Click();
 
-            SelectFromFlyOut(driver, text, By.CssSelector(".quickMaxPrice div.Flyout[role='Dialog'] div.option span"));
+            //Click option
+            IWebElement element = driver.FindElement(By.XPath($"//span[contains(@class, 'quickMaxPrice')]//span[contains(text(),'{text}')]"));
+            element.Click();
             return this;
         }
 
         private By drpbx_MinBeds = By.CssSelector("span.minBeds.withFlyout.withOptions.mounted.field.select.Select.clickable.optional");
         public PropertySearch drpbx_MinBeds_Click(string text)
-        {
+        {            
+            //Open flyout
             wElement = getWebElement(driver, drpbx_MinBeds);
             wElement.Click();
 
-            SelectFromFlyOut(driver, text, By.CssSelector(".minBeds div.Flyout[role='Dialog'] div.option span"));
+            //Click option
+            IWebElement element = driver.FindElement(By.XPath($"//span[contains(@class, 'minBeds')]//span[contains(text(),'{text}')]"));
+            element.Click();
             return this;
         }
         private By drpbx_MaxBeds = By.CssSelector("span.maxBeds.withFlyout.withOptions.mounted.field.select.Select.clickable.optional");
@@ -80,7 +81,9 @@ namespace RedFin.PageObjects
             wElement = getWebElement(driver, drpbx_MaxBeds);
             wElement.Click();
 
-            SelectFromFlyOut(driver, text, By.CssSelector(".maxBeds div.Flyout[role='Dialog'] div.option span"));
+            //Click option
+            IWebElement element = driver.FindElement(By.XPath($"//span[contains(@class, 'maxBeds')]//span[contains(text(),'{text}')]"));
+            element.Click();
             return this;
         }
 
@@ -176,7 +179,7 @@ namespace RedFin.PageObjects
         }
 
 
-        //PAGE NAVIGATION
+        //PAGE NAVIGATION        
 
         private By SearchResultsPages = By.CssSelector("[data-rf-test-id='paging-controls'] .goToPage");
 
@@ -185,7 +188,11 @@ namespace RedFin.PageObjects
         private By HomeCardBaths = By.CssSelector("div.homecards div.HomeCardContainer .bottomV2 .HomeStatsV2 .stats");
         public PropertySearch GetSearchResults()
         {
+            //Explicitly wait for pushpin animation to complete
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.ElementExists(By.CssSelector(".Pushpin.homePushpin.clickableHome.animateMarkers")));
+
             IEnumerable<string> pageNumbers = new List<string>(getWebElements(driver, SearchResultsPages).Select(iw => iw.Text));
+
             int totalPages = 1;
             if(pageNumbers.Count() > 0)
                 totalPages = Int32.Parse(pageNumbers.Last());
